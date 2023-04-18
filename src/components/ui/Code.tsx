@@ -36,7 +36,7 @@ const Code: FC<CodeProps> = ({
     }
   }, [code, show, animated, animationDelay]);
 
-  const lines = text.split(/\r\n|\r|\n/);
+  const lines = text.split(/\r\n|\r|\n/).length
   const theme = applicationTheme === "light" ? lightTheme : darkTheme;
 
   return (
@@ -48,7 +48,7 @@ const Code: FC<CodeProps> = ({
             "transition-all w-fit bg-transparent duration-100 py-0 no-scrollbar"
           }
           style={{
-            maxHeight: show ? Number(lines) * 24 : 0,
+            maxHeight: show ? lines * 24 : 0,
             opacity: show ? 1 : 0,
           }}
         >
@@ -60,7 +60,7 @@ const Code: FC<CodeProps> = ({
                 {line.map((token, index) => {
                   //eslint-disable-next-line no-unused-vars
                   const { key, ...props } = getTokenProps({ token, i });
-                  return <span key={index} {...props}></span>;
+                  return <span key={index} {...props} />;
                 })}
               </div>
             );
